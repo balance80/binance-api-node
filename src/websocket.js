@@ -172,8 +172,11 @@ const candles = (payload, interval, cb, transform = true, variator) => {
     return w
   })
 
-  return options =>
-    cache.forEach(w => w.close(1000, 'Close handle was called', { keepClosed: true, ...options }))
+  return {
+    options =>
+      cache.forEach(w => w.close(1000, 'Close handle was called', { keepClosed: true, ...options })),
+    cache
+  }
 }
 
 const miniTickerTransform = m => ({
