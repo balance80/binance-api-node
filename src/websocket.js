@@ -173,9 +173,11 @@ const candles = (payload, interval, cb, transform = true, variator) => {
   })
 
   return {
-    options =>
-      cache.forEach(w => w.close(1000, 'Close handle was called', { keepClosed: true, ...options })),
-    cache
+    close: options =>
+      cache.forEach(w =>
+        w.close(1000, 'Close handle was called', { keepClosed: true, ...options }),
+      ),
+    cache,
   }
 }
 
